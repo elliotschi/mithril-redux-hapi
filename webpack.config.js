@@ -1,50 +1,60 @@
-const path = require('path');
+'use strict';
+// without imports for the middleware
 const webpack = require('webpack');
-const util = require('util');
-const isProd = process.env.NODE_ENV === 'production';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  devTool: isProd ? '' : 'sourcemap',
-  context: path.join(__dirname, 'src'),
+const LAUNCH_COMMAND = process.env.npm_lifecycle_event;
 
-  entry: {
-    app: ['./app.js']
-  },
+const isProduction = process.env.NODE_ENV === 'production';
+process.env.BABEL_ENV = process.env.NODE_ENV;
 
+const PATHS = {
+  app: path.join(__dirname, 'src'),
+  build: path.join(__dirname, 'dist')
+};
+
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: PATHS.app + '/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+
+const productionPlugin = new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: JSON.stringify('production')
+  }
+});
+
+const base = {
+  entry: [
+    PATHS.app
+  ],
   output: {
-    path: path.resolve('./dist'),
-    publicPath: '/',
-    filename: '[name].js'
+    path: PATHS.build,
+    filename: 'index_bundle.js'
   },
-
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
-        test: /\.html$/,
-        exclude: /node_modules/,
-        loader: 'file?name=[path]index.[ext]'
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[path][hash].[ext]',
-          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-        ]
-      }
+      {test: /\.(js)?$/, exclude: /node_modules/, loader: 'babel-loader'}
     ]
-  },
-
-  plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(isProd ? 'production' : 'development')
-      }
-    }),
-  ]
+  }
 };
+
+const developmentConfig = {
+  devtool: 'cheap-module-inline-source-map',
+  devServer: {
+    contentBase: PATHS.app,
+    hot: true,
+    inline: true,
+    progress: true
+  },
+  plugins: [HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin(), new webpack.optimize.OccurenceOrderPlugin()]
+};
+
+const productionConfig = {
+  devtool: 'cheap-module-source-map',
+  plugins: [HTMLWebpackPluginConfig, productionPlugin]
+};
+
+module.exports = Object.assign({}, base, isProduction === true ? productionConfig : developmentConfig);

@@ -28,6 +28,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.22.0",
     "image-webpack-loader": "^2.0.0",
     "imports-loader": "^0.6.5",
     "midux": "^0.1.8",
