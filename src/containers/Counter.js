@@ -25,10 +25,10 @@ const Counter = {
         <h1>
           {`${counter} clicked`}
         </h1>
-        <button onclick={increment}>
+        <button onClick={increment}>
           increment
         </button>
-        <button onclick={decrement}>
+        <button onClick={decrement}>
           decrement
         </button>
       </div>
