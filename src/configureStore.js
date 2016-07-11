@@ -7,7 +7,7 @@ let middleware = [
   reduxObservable()
 ];
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   middleware.push(require('redux-logger')());
 }
 
