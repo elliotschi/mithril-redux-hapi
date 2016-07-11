@@ -1,0 +1,44 @@
+{
+  "name": "learn-mithril",
+  "version": "1.0.0",
+  "description": "learning mithril",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development webpack-dev-server --content-base ./dist/ --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliotschi/mithril.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elliotschi/mithril/issues"
+  },
+  "homepage": "https://github.com/elliotschi/mithril#readme",
+  "dependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.3",
+    "image-webpack-loader": "^2.0.0",
+    "imports-loader": "^0.6.5",
+    "midux": "^0.1.8",
+    "mithril": "^0.2.5",
+    "path": "^0.12.7",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-observable": "^0.6.2",
+    "rxjs": "^5.0.0-beta.10",
+    "util": "^0.10.3",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
