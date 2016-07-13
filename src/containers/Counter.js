@@ -31,6 +31,15 @@ const Counter = {
         <button onClick={decrement}>
           decrement
         </button>
+
+        <button
+          style={{
+            color: 'red'
+          }}
+          onClick={() => m.route('/navigation')}
+        >
+          nav
+        </button>
       </div>
     )
   }

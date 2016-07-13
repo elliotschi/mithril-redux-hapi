@@ -31,6 +31,14 @@ server.register(require('inert'), (err) => {
   });
 });
 
+// server.router({
+//   method: 'GET',
+//   path: '*',
+//   handler: (req, res) => {
+    
+//   }
+// })
+
 server.start(err => {
   if (err) throw err;
 
